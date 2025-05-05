@@ -1,4 +1,4 @@
-import { PlusCircle } from "phosphor-react";
+import { PlusCircle, Trash } from "phosphor-react";
 import { Empty } from "./components/List/Empty";
 import { Header as ListHeader } from "./components/List/Header";
 import { Header } from "./components/Header"
@@ -30,6 +30,11 @@ export function App() {
     setTasks(updatedTasks);
   };
 
+  const handleDeleteTask = (index: number) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+  }
+
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
 
@@ -52,16 +57,24 @@ export function App() {
         </div>
         <div className={styles.tasksList}>
           <ListHeader totalTasks={totalTasks} completedTasks={completedTasks} />
-          {tasks.length > 0 ? (
-            <ul className={styles.taskList} style={{ listStyle: "none"}}>
+
+            {tasks.length > 0 ? (
+            <ul className={styles.taskList}>
               {tasks.map((task, index) => (
                 <li key={index} className={styles.taskItem}>
-                  <input type="radio" checked={task.completed} onChange={() => toggleTaskCompletion(index)} />
+                  <div className={styles.taskContent}>
+                    <input type="checkbox" 
+                      checked={task.completed} 
+                      onChange={() => toggleTaskCompletion(index)} className={styles.checkbox} 
+                    />
+                    <span className={`${styles.taskText} ${task.completed ? styles.completed : ""}`}>
+                      {task.text}
+                    </span>
+                  </div>
 
-                  <span style={{marginLeft: "8px", textDecoration: task.completed ? "line-through" : "none", color: task.completed ? "#888" : "#ffff", }}>
-                    {task.text}
-                    
-                  </span>
+                  <button onClick={() => handleDeleteTask(index)} className={styles.deleteButton}>
+                    <Trash size={16} color="#f2f2f2" weight="bold" />
+                  </button>
                 
                 
                 </li>

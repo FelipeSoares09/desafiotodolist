@@ -1,4 +1,5 @@
-.content{
+
+  .content {
     max-width: 46rem;
     width: 100%;
   
@@ -7,28 +8,85 @@
   
   .taskInfoContainer {
     display: flex;
-    flex: 1;
-  
-    justify-content: space-between;
-    gap: 0.5rem;  
-  }
-  
-  .taskInfoContainer input, .taskInfoContainer button {
-    transform: translateY(-50%);
-  
-    margin-bottom: 2.3125rem;
+    gap: 8px;
+    margin-bottom: 16px;
   }
   
   .tasksList {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    margin-top: 16px;
   }
   
-  .tasksList > div {
+  .taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .taskItem {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    background: #262626;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .taskContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checkbox {
+  appearance: none; /* Remove o estilo padrão do checkbox */
+  -webkit-appearance: none; /* Compatibilidade com navegadores baseados em WebKit */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4ea8de; /* Cor da borda */
+  border-radius: 50%; /* Faz o checkbox ficar redondo */
+  background-color: transparent; /* Fundo transparente */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  transition: background-color 0.2s, border-color 0.2s;
+  
   }
 
+  .checkbox:checked {
+    background-color: #5e60ce; 
+    border-color: #5e60ce; 
+  }
+  
+  .checkbox:checked::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%; 
+  }
+  
+  .taskText {
+    font-size: 14px;
+    color: #f2f2f2;
+  }
+  
+  .taskText.completed {
+    text-decoration: line-through;
+    color: #808080;
+  }
+  
+  .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #f2f2f2;
+    transition: color 0.2s;
+  }
+  
+  .deleteButton:hover {
+    color: #ff4d4d;
+  }
  
