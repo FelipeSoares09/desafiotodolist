@@ -73,7 +73,7 @@ export function App() {
                   </div>
 
                   <button onClick={() => handleDeleteTask(index)} className={styles.deleteButton}>
-                    <Trash size={16} color="#f2f2f2" weight="bold" />
+                    <Trash size={20} color="#808080" weight="bold" />
                   </button>
                 
                 
