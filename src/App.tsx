@@ -10,10 +10,10 @@ import { useState } from "react";
 
 export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
-  const [newTask, setNewTask] = useState<string>("");
+  const [newTask, setNewTask] = useState("");
 
   const handleNewTask = () => {
-    if (newTask.trim()) {
+    if (newTask.trim() !== "") {
       setTasks([...tasks, newTask]);
       setNewTask("");
     }
@@ -38,7 +38,17 @@ export function App() {
         </div>
         <div className={styles.tasksList}>
           <ListHeader />
-          <Empty />
+          {tasks.length > 0 ? (
+            <ul className={styles.taskList}>
+              {tasks.map((task, index) => (
+                <li key={index} className={styles.taskItem}>
+                  {task}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Empty />
+          )}
         </div>
       </section>
 
