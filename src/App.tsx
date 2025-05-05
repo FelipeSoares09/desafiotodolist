@@ -7,17 +7,31 @@ import { Button } from "./components/Button";
 import styles from './App.module.css'
 import { useState } from "react";
 
+interface Task {
+  text: string;
+  completed: boolean;
+}
 
 export function App() {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
 
   const handleNewTask = () => {
     if (newTask.trim() !== "") {
-      setTasks([...tasks, newTask]);
+      setTasks([...tasks, { text: newTask, completed: false }]);
       setNewTask("");
     }
   };
+
+  const toggleTaskCompletion = (index: number) => {
+    const updatedTasks = tasks.map((task, i) => 
+      i === index ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+  };
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
 
   return (
     <>
@@ -37,12 +51,19 @@ export function App() {
             </Button>
         </div>
         <div className={styles.tasksList}>
-          <ListHeader />
+          <ListHeader totalTasks={totalTasks} completedTasks={completedTasks} />
           {tasks.length > 0 ? (
-            <ul className={styles.taskList}>
+            <ul className={styles.taskList} style={{ listStyle: "none"}}>
               {tasks.map((task, index) => (
                 <li key={index} className={styles.taskItem}>
-                  {task}
+                  <input type="radio" checked={task.completed} onChange={() => toggleTaskCompletion(index)} />
+
+                  <span style={{marginLeft: "8px", textDecoration: task.completed ? "line-through" : "none", color: task.completed ? "#888" : "#ffff", }}>
+                    {task.text}
+                    
+                  </span>
+                
+                
                 </li>
               ))}
             </ul>
