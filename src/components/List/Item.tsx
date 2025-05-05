@@ -1,9 +1,12 @@
 import styles from './Item.module.css';
 
-export function Item() {
+export function Item({ tasks }: { tasks: string[] }) {
+    
     return (
-        <div className={styles.container}>
-
-        </div>
-    )
+        <ul className={styles.container}>
+            {tasks.map((task, index) => (
+                <li key={index}>{task}</li>
+            ))}
+        </ul>
+    );
 }
